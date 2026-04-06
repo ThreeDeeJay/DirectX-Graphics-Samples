@@ -19,12 +19,12 @@ on:
 
 jobs:
   Build:
-    name: ${{matrix.Settings.Name}}-${{matrix.Configuration}}
+    name: ${{matrix.Project}}-${{matrix.Settings.Name}}-${{matrix.Configuration}}
     runs-on: windows-2022
     strategy:
       matrix:
-        Project: [D3D12VariableRateShading, D3D12MeshShaders, D3D12Raytracing]
-        Configuration: [Release] #[Release, Debug]
+        Project: [D3D12VariableRateShading, D3D12MeshShaders]
+        Configuration: [Release]
         Settings:
         - {
             Name: "Win64",
