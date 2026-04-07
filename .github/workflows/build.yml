@@ -74,44 +74,15 @@ jobs:
         /m "Samples/Desktop/${{matrix.Project}}/src/${{matrix.Project}}.sln"
         /p:Configuration="${{matrix.Configuration}}"
         /p:PlatformToolset=v143
-#/p:IncludePath="C:\vcpkg\installed\${{matrix.Settings.Triplet}}\include"
-#/p:Platform="${{matrix.Settings.Platform}}"
-#/p:AdditionalIncludePaths="C:\Path\to\external\include"
-#/p:LibPath="C:\Path\to\Lib"
-#/p:AdditionalLibraryDirectories="C:\Path\to\external\lib"
-#/p:AdditionalDependencies=file.lib
-#/p:LanguageStandard="stdcpp17"
-#/p:OutputPath="${{env.Artifacts}}"
 
-#    - name: Publish
-#      run: > 
-#        dotnet
-#        publish "${{github.event.repository.name}}.App/${{github.event.repository.name}}.App.csproj"
-#        -c "${{matrix.Configuration}}"
-
-#    - name: Meson Build
-#      uses: BSFishy/meson-build@v1.0.3
-#      with:
-#        action: build
-      
     - name: List files
       run: ls -R
-
-#    - name: Deploy
-#      shell: cmd
-#      run: |
-#        windeployqt.exe "${{github.workspace}}/${{env.Artifacts}}/${{env.Executable}}"
-#        If exist "vcpkg\installed\${{matrix.Settings.Triplet}}\bin\*.dll"       (copy "vcpkg\installed\${{matrix.Settings.Triplet}}\bin\*.dll"       "${{env.Artifacts}}")
-#        If exist "vcpkg_installed\${{matrix.Settings.Triplet}}\bin\*.dll"       (copy "vcpkg_installed\${{matrix.Settings.Triplet}}\bin\*.dll"       "${{env.Artifacts}}")
-#        If exist "vcpkg\installed\${{matrix.Settings.Triplet}}\debug\bin\*.dll" (copy "vcpkg\installed\${{matrix.Settings.Triplet}}\debug\bin\*.dll" "${{env.Artifacts}}")
-#        If exist "vcpkg_installed\${{matrix.Settings.Triplet}}\debug\bin\*.dll" (copy "vcpkg_installed\${{matrix.Settings.Triplet}}\debug\bin\*.dll" "${{env.Artifacts}}")
-#        move "assets" "${{env.Artifacts}}"
 
     - name: Upload artifacts
       uses: actions/upload-artifact@v4
       with:
         name: ${{env.Title}}-${{matrix.Project}}-${{matrix.Settings.Name}}-${{matrix.Configuration}}
-        path: "${{github.workspace}}/${{env.Artifacts}}/"
+        path: "${{github.workspace}}/Samples/Desktop/${{matrix.Project}}/src/bin/${{matrix.Settings.Platform}}/${{matrix.Configuration}}/"
 
   Release:
     name: Release
