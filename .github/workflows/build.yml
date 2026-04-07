@@ -110,7 +110,7 @@ jobs:
     - name: Upload artifacts
       uses: actions/upload-artifact@v4
       with:
-        name: ${{env.Title}}-${{matrix.Settings.Name}}-${{matrix.Configuration}}
+        name: ${{env.Title}}-${{matrix.Project}}-${{matrix.Settings.Name}}-${{matrix.Configuration}}
         path: "${{github.workspace}}/${{env.Artifacts}}/"
 
   Release:
@@ -130,16 +130,16 @@ jobs:
           echo "CommitCount=$(git rev-list --count HEAD)" >> $env:GITHUB_ENV
           echo "CommitDate=$(git show -s --date=format:'%Y-%m-%d' --format=%cd)" >> $env:GITHUB_ENV
 
-#      - name: Download Artifacts - Win32
-#        uses: actions/download-artifact@v4
-#        with:
-#          name: ${{env.Title}}-Win32-Release
-#          path: Release/Win32/
-
-      - name: Download Artifacts - Win64
+      - name: Download Artifacts - D3D12VariableRateShading
         uses: actions/download-artifact@v4
         with:
-          name: ${{env.Title}}-Win64-Release
+          name: ${{env.Title}}-D3D12VariableRateShading-Win64-Release
+          path: Release/Win64/
+
+      - name: Download Artifacts - D3D12MeshShaders
+        uses: actions/download-artifact@v4
+        with:
+          name: ${{env.Title}}-D3D12MeshShaders-Win64-Release
           path: Release/Win64/
 
       - name: Deploy
