@@ -23,7 +23,7 @@ jobs:
     runs-on: windows-2022
     strategy:
       matrix:
-        Project: [D3D12VariableRateShading, D3D12MeshShaders]
+        Project: [D3D12HelloWorld, D3D12nBodyGravity, D3D12VariableRateShading, D3D12MeshShaders]
         Configuration: [Release]
         Settings:
         - {
@@ -101,6 +101,18 @@ jobs:
           echo "CommitHashShort=$(git rev-parse --short=7 HEAD)" >> $env:GITHUB_ENV
           echo "CommitCount=$(git rev-list --count HEAD)" >> $env:GITHUB_ENV
           echo "CommitDate=$(git show -s --date=format:'%Y-%m-%d' --format=%cd)" >> $env:GITHUB_ENV
+
+      - name: Download Artifacts - D3D12HelloWorld
+        uses: actions/download-artifact@v4
+        with:
+          name: ${{env.Title}}-D3D12HelloWorld-Win64-Release
+          path: Release/Win64/
+
+      - name: Download Artifacts - D3D12nBodyGravity
+        uses: actions/download-artifact@v4
+        with:
+          name: ${{env.Title}}-D3D12nBodyGravity-Win64-Release
+          path: Release/Win64/
 
       - name: Download Artifacts - D3D12VariableRateShading
         uses: actions/download-artifact@v4
