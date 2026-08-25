@@ -66,12 +66,12 @@ jobs:
 
     - name: Restore
       working-directory: ${{env.GITHUB_WORKSPACE}}
-      run: nuget restore "Samples/Desktop/${{matrix.Project}}/src/${{matrix.Project}}.sln"
+      run: nuget restore "Samples/Desktop/${{matrix.Project}}/src/${{matrix.Project}}.slnx"
 
     - name: Build
       run: >
         msbuild
-        /m "Samples/Desktop/${{matrix.Project}}/src/${{matrix.Project}}.sln"
+        /m "Samples/Desktop/${{matrix.Project}}/src/${{matrix.Project}}.slnx"
         /p:Configuration="${{matrix.Configuration}}"
         /p:PlatformToolset=v143
 
