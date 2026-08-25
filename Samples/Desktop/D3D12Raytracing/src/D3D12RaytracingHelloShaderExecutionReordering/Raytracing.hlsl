@@ -157,7 +157,8 @@ void MyRaygenShader()
         #ifdef SKIP_INVOKE_INSTEAD_SHADE_IN_RAYGEN
             if(hit.IsHit())
             {
-                MyAttributes attr = hit.GetAttributes<MyAttributes>();
+                MyAttributes attr;
+                hit.GetAttributes(attr);
                 color = ClosestHitWorker(attr,iterations);
             }
             else
