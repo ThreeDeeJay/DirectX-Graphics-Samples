@@ -72,6 +72,7 @@ jobs:
       run: >
         msbuild
         /m "Samples/Desktop/${{matrix.Project}}/src/${{matrix.Project}}.slnx"
+        /p:Platform="${{matrix.Settings.Platform}}"
         /p:Configuration="${{matrix.Configuration}}"
         /p:PlatformToolset=v143
 
